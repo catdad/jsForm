@@ -1,0 +1,69 @@
+
+<html>
+<head>
+	<title>VGI App</title>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	
+	<link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+
+<body>
+
+<div id='container'>
+	<div id='header'>
+		<div class='wrapper'>Header</div>
+	</div>
+	<div id='main'>
+		<div class='wrapper'>
+			<div id='form'></div>
+		</div>
+	</div>
+	<div id='footer'>
+		<div class='wrapper'>Footer</div>
+	</div>
+</div>
+
+<script type="text/javascript" src='https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAOBn9akxTikT9Tj9G4lpHNAGvQeZeuivM&sensor=true"></script>
+
+<script type="text/javascript" src='tabletop/src/tabletop.js'></script>
+<script type="text/javascript" src='vgi.js'></script>
+
+<script>
+	//create app object
+	var app = new App();
+
+	//create questions
+	var reportType = app.newQuestion({
+		type: 'radio',
+		name: 'type',
+		answers: ['Injury', 'Bar', 'Other']
+	});
+	var report = app.newQuestion({
+		type: 'radio',
+		name: 'report',
+		answers: ['Fall', 'Shovel', 'Kick']
+	});
+	var map = app.newQuestion({
+		type: 'map',
+		name: 'location',
+		map: {}
+		/*map: {
+			zoom: 8,
+			center: new google.maps.LatLng(38.5002893070005, -98.5006261939997),
+			mapTypeId: google.maps.MapTypeId.ROADMAP
+		} /* */
+	});
+
+	//add questions to DOM
+	$('#form').addQuestion(reportType);
+	$('#form').addQuestion(report);
+	$('#form').addQuestion(map);
+</script>
+
+</body>
+</html>
