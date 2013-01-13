@@ -94,10 +94,10 @@ var App = function(callback){
 		
 		//response function
 		this.response = function(){
-			var result;
+			var result = [];
 			
 			$(this.DOM).find('input').each(function(idx, el){
-				if (el.checked) result = el.value;
+				if (el.checked) result.push(el.value);
 			});
 			
 			return result || null;
@@ -112,6 +112,9 @@ var App = function(callback){
 		
 		switch (options.type){
 			case 'radio':
+				that = new RadioQuestion(options);
+				break;
+			case 'checkbox':
 				that = new RadioQuestion(options);
 				break;
 			case 'map':
@@ -207,6 +210,7 @@ var App = function(callback){
 (function($){
 	$.fn.addQuestion = function(question){
 		this.append(question.DOM);
+		return this;
 	};
 })(jQuery);
 

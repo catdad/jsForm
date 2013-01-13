@@ -48,6 +48,11 @@
 		name: 'report',
 		answers: ['Fall', 'Shovel', 'Kick']
 	});
+	var check = app.newQuestion({
+		type: 'checkbox',
+		name: 'check',
+		answers: ['Red', 'Green', 'Blue', 'Yellow']
+	});
 	var map = app.newQuestion({
 		type: 'map',
 		name: 'location',
@@ -62,6 +67,7 @@
 	//add questions to DOM
 	$('#form').addQuestion(reportType);
 	$('#form').addQuestion(report);
+	$('#form').addQuestion(check);
 	$('#form').addQuestion(map);
 </script>
 
