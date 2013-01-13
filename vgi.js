@@ -104,6 +104,27 @@ var App = function(callback){
 		};
 	};
 	
+	//constructor for text input
+	//options = { type, name }
+	var TextQuestion = this.TextQuestion = function(options){
+		var el = document.createElement('input');
+		el.type = options.type;
+		el.name = options.name;
+		el.id = options.name;
+		
+		//create the DOM for this question
+		var DOM = this.DOM = document.createElement('div');
+		DOM.id = options.name;
+		DOM.classList.add('question');
+		
+		DOM.appendChild( el );
+		
+		//response function
+		this.response = function(){
+			return $(this.DOM).find('input').val();
+		};
+	};
+	
 	// Question constructor
 	// always use keyword 'new' when creating one
 	var Question = this.Question = function(options){
@@ -116,6 +137,9 @@ var App = function(callback){
 				break;
 			case 'checkbox':
 				that = new RadioQuestion(options);
+				break;
+			case 'text':
+				that = new TextQuestion(options);
 				break;
 			case 'map':
 				that = new MapQuestion(options);

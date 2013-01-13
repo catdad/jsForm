@@ -53,6 +53,10 @@
 		name: 'check',
 		answers: ['Red', 'Green', 'Blue', 'Yellow']
 	});
+	var textQuestion = app.newQuestion({
+		type: 'text',
+		name: 'text'
+	});
 	var map = app.newQuestion({
 		type: 'map',
 		name: 'location',
@@ -67,7 +71,7 @@
 	//add questions to DOM
 	$('#form').addQuestion(reportType);
 	$('#form').addQuestion(report);
-	$('#form').addQuestion(check);
+	$('#form').addQuestion(check).addQuestion(textQuestion);
 	$('#form').addQuestion(map);
 </script>
 
