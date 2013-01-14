@@ -1,4 +1,5 @@
 #PGIS
+___
 
 This is a sample participatory GIS / volunteered geographic information application.
 
@@ -21,7 +22,7 @@ This app extends jQuery. After that, adding the question to the form:
     
 ##Question Options
 
-Most major HTML inputs are supported. I will work to add HTML5 inputs as well. Here are sample options for the different types of questions:
+Most major HTML inputs are supported. _I will work to add HTML5 inputs as well._ Here are sample options for the different types of questions:
 
     // text input
     var options = {
@@ -56,7 +57,7 @@ There is also a special question type for map markers. This question requires th
       }
     };
     
-The variables inside `map` are optional for creating a question, but required by Google Maps.
+The variables inside `map` are optional for creating a question, but required by Google Maps. These are passed directly to the [Google Maps API](https://developers.google.com/maps/documentation/javascript/tutorial), and all options from the [Google Maps API](https://developers.google.com/maps/documentation/javascript/reference#MapOptions) are supported here.
 
 ##The Question Object
 
