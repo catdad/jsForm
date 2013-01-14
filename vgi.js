@@ -1,4 +1,14 @@
 var App = function(callback){
+	//helper each function
+	//acts like $.each()
+	var each = this.each = function(arr, callback){
+		var len = arr.length, i;
+		
+		for (i = 0; i < len; i++){
+			callback( i, arr[i] );
+		}
+	};
+	
 	//container for all questions
 	var questions = this.questions = [];
 	
@@ -88,19 +98,20 @@ var App = function(callback){
 		DOM.classList.add('question');
 		
 		//this.answers.forEach(function(value, idx, arr){
-		$.each(this.answers, function(idx, value){
+		each(this.answers, function(idx, value){
 			DOM.appendChild( input(value) );
 		});
 		
 		//response function
 		this.response = function(){
-			var result = [];
+			var results = [];
+			var values = this.DOM.getElementsByTagName('input');
 			
-			$(this.DOM).find('input').each(function(idx, el){
-				if (el.checked) result.push(el.value);
+			each(values, function(idx, el){
+				if (el.checked) results.push(el.value);
 			});
 			
-			return result || null;
+			return results || null;
 		};
 	};
 	
@@ -121,7 +132,7 @@ var App = function(callback){
 		
 		//response function
 		this.response = function(){
-			return $(this.DOM).find('input').val();
+			return textQuestion.DOM.getElementsByTagName('input')[0].value;
 		};
 	};
 	
