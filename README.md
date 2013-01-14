@@ -66,7 +66,7 @@ The question object exposes a few useful things.
 
 `.response()` returns the response of each question. _This still needs to be standardized._
 
-##Savig Responses
+##Saving Responses
 
 Responses are saved through a [Google Docs form](http://support.google.com/drive/bin/answer.py?hl=en&answer=87809&topic=1360904&ctx=topic). This part will need to be configured by the user with a form key and a schema for the answers.
 
