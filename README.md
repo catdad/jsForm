@@ -1,5 +1,4 @@
 #PGIS
-___
 
 This is a sample participatory GIS / volunteered geographic information application.
 
@@ -66,6 +65,12 @@ The question object exposes a few useful things.
 `.DOM` is the DOM object for the question. It is linked directly to what is displayed on the page.
 
 `.response()` returns the response of each question. _This still needs to be standardized._
+
+##Savig Responses
+
+Responses are saved through a [Google Docs form](http://support.google.com/drive/bin/answer.py?hl=en&answer=87809&topic=1360904&ctx=topic). This part will need to be configured by the user with a form key and a schema for the answers.
+
+_This section is not complete, and I still need to make that part configurable._
 
 ##Credits
 
