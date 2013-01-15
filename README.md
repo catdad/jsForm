@@ -12,7 +12,8 @@ After that, creating questions works as follows:
 
     var myQuestion = myApp.newQuestion({
       name: 'name',
-      type: 'text'
+      type: 'text',
+      question: 'What am I asking?'
     });
     
 This app extends jQuery. After that, adding the question to the form:
@@ -26,13 +27,15 @@ Most major HTML inputs are supported. _I will work to add HTML5 inputs as well._
     // text input
     var options = {
       name: 'name',
-      type: 'text'
+      type: 'text',
+      question: 'What am I asking?'
     };
     
     // radio input (select one)
     var options = {
       name: 'name',
       type: 'radio',
+      question: 'Which is the best number?',
       answers: [ 'one', 'two', 'three' ]
     };
     
@@ -40,6 +43,7 @@ Most major HTML inputs are supported. _I will work to add HTML5 inputs as well._
     var options = {
       name: 'name',
       type: 'checkbox',
+      question: 'Which numbers are even?',
       answers: [ 'one', 'two', 'three' ]
     };
     
@@ -49,6 +53,7 @@ There is also a special question type for map markers. This question requires th
     var options = {
       type: 'map',
       name: 'location',
+      question: 'Pick a location.',
       map: {
         zoom: 8,
         center: new google.maps.LatLng(38.5002893070005, -98.5006261939997),
