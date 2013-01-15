@@ -143,7 +143,7 @@ var App = function(callback){
 		//add question to DOM
 		var question = document.createElement('div');
 		question.classList.add('text');
-		question.innerHTML = options.question; //this is ugly, sorry
+		question.innerHTML = options.question || ''; //this is ugly, sorry
 		DOM.appendChild( question );
 		
 		//add DOM to options
