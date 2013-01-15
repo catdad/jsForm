@@ -32,9 +32,8 @@ var App = function(callback){
 	  	if (mapOptions && !mapOptions.zoom) mapOptions.zoom = 4;
 	  	if (mapOptions && !mapOptions.mapTypeId) mapOptions.mapTypeId = google.maps.MapTypeId.ROADMAP;
 	  	
-	  	//create map
-	  	var mapDOM = this.DOM = document.createElement('div');
-	  	mapDOM.id = name;
+	  	//update map DOM
+	  	var mapDOM = this.DOM = options.DOM;
 		mapDOM.classList.add('map');
 		
 	  	var map = this.map = new google.maps.Map(mapDOM, mapOptions);
@@ -69,6 +68,7 @@ var App = function(callback){
 	//options = { type, name, answers[] }
 	var RadioQuestion = this.RadioQuestion = function(options){
 		var answers = this.answers = options.answers;
+		var DOM = this.DOM = options.DOM;
 		
 		//return input DOM elements
 		var input = this.input = function(value){
@@ -91,11 +91,6 @@ var App = function(callback){
 			
 			return div;
 		};
-		
-		//create the DOM for this question
-		var DOM = this.DOM = document.createElement('div');
-		DOM.id = options.name;
-		DOM.classList.add('question');
 		
 		//this.answers.forEach(function(value, idx, arr){
 		each(this.answers, function(idx, value){
@@ -124,9 +119,7 @@ var App = function(callback){
 		el.id = options.name;
 		
 		//create the DOM for this question
-		var DOM = this.DOM = document.createElement('div');
-		DOM.id = options.name;
-		DOM.classList.add('question');
+		var DOM = this.DOM = options.DOM;
 		
 		DOM.appendChild( el );
 		
@@ -141,6 +134,20 @@ var App = function(callback){
 	var Question = this.Question = function(options){
 		//get question based on type
 		var that;
+		
+		//create the DOM for this question
+		var DOM = document.createElement('div');
+		DOM.id = options.name;
+		DOM.classList.add('question');
+		
+		//add question to DOM
+		var question = document.createElement('div');
+		question.classList.add('text');
+		question.innerHTML = options.question; //this is ugly, sorry
+		DOM.appendChild( question );
+		
+		//add DOM to options
+		options.DOM = DOM;
 		
 		switch (options.type){
 			case 'radio':
@@ -163,6 +170,7 @@ var App = function(callback){
 		//set up the Question object
 		that.type = options.type;
 		that.name = options.name;
+		that.question = options.question;
 		
 		//return the new question
 		return that;
