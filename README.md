@@ -63,13 +63,21 @@ There is also a special question type for map markers. This question requires th
     
 The variables inside `map` are optional for creating a question, but required by Google Maps. These are passed directly to the [Google Maps API](https://developers.google.com/maps/documentation/javascript/tutorial), and all options from the [Google Maps API](https://developers.google.com/maps/documentation/javascript/reference#MapOptions) are supported here.
 
+There are several optional values you can specify:
+
+*TODO*
+`validate` value can either be passed a function or the value `'required'`. The function will be given one parameter, the `.response()` object, and needs to return `true` or `false`.
+
 ##The Question Object
 
 The question object exposes a few useful things.
 
 `.DOM` is the DOM object for the question. It is linked directly to what is displayed on the page.
 
-`.response()` returns the response of each question. _This still needs to be standardized._
+`.response()` returns the response of each question. This will return `null` if no response is found, or an appropriate response. For 'radio' or 'checkbox' questions, it will return an array. For 'text' questions, it returns a string. For 'map' quetions, it will return an object of the format `{ lat: 30.4349, lon: -90.4563 }`.
+
+*TODO*
+`.validate()` returns `true` or `false`. However, this is not required, so you should check if validate exists before calling it.
 
 ##Saving Responses
 
