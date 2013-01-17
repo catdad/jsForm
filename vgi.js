@@ -1,4 +1,4 @@
-var App = function(callback){
+var Form = function(callback){
 	//helper each function
 	//acts like $.each()
 	var each = this.each = function(arr, callback){
@@ -17,7 +17,7 @@ var App = function(callback){
 		var question = new Question(options);
 		
 		//add question to list
-		questions.push(this);
+		questions.push(question);
 		
 		return question;
 	};
@@ -199,13 +199,6 @@ var App = function(callback){
 		return that;
 	};
 	
-	var validate = {
-		required: function(value){
-			if (value) console.log('pass');
-			else console.log('fail');
-		}
-	};
-	
 	var options = this.options = {
 		debug: true
 	};
@@ -223,6 +216,16 @@ var App = function(callback){
 		wanted: sheets(),
 		debug: true
 	}); /* */
+	
+	var allResponses = this.allResponses = function(){
+		var responses = {};
+		
+		each(questions, function(idx, question){
+			responses[question.name] = question.response();
+		});
+		
+		return responses;
+	};
 	
 	var submit = this.submit = function(){
 		var type = 'injury';
