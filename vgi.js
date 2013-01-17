@@ -59,8 +59,12 @@ var App = function(callback){
 		});
 		
 		this.response = function(){
-			var position = this.marker.position;
-			return { lat: position.Ya, lon: position.Za };
+			if (this.marker && this.marker.position) {
+				var position = this.marker.position;
+				return { lat: position.Ya, lon: position.Za };
+			}
+			else 
+				return null;
 		};
   	};
 	
@@ -106,7 +110,7 @@ var App = function(callback){
 				if (el.checked) results.push(el.value);
 			});
 			
-			return results || null;
+			return (results.length > 0) ? results : null;
 		};
 	};
 	
@@ -172,32 +176,33 @@ var App = function(callback){
 		that.name = options.name;
 		that.question = options.question;
 		
+		//set up validation
+		if (!options.validate)
+			that.validate = null;
+		else
+			that.validate = function(){
+				var response = this.response();
+				
+				if ( (typeof options.validate) === 'function' && response){
+					//call custom function -- myValidate( value )
+					return options.validate( response );
+				}
+				else if (options.validate === 'required'){
+					//check if this.response() is valid
+					if ( response ) return true;
+					else return false;
+				}
+				else return false;
+			};
+		
 		//return the new question
 		return that;
 	};
 	
-	//add helper functions
-	Question.prototype = {
-		//return the selected response of the question
-		// ** only works on radio responses
-		response: function(){
-			var result;
-			
-			switch(this.type){
-				case 'radio':
-					//go through all elements and find selected answer
-					
-					break;
-				case 'marker':
-					//temp - get map marker -- this should be stored in question
-					
-					break;
-				default:
-					result = null;
-					break;
-			};
-			
-			return result;
+	var validate = {
+		required: function(value){
+			if (value) console.log('pass');
+			else console.log('fail');
 		}
 	};
 	

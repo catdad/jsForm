@@ -48,24 +48,28 @@
 		type: 'radio',
 		name: 'report',
 		question: 'How did the injury ocur?',
-		answers: ['Fall', 'Shovel', 'Kick']
+		answers: ['Fall', 'Shovel', 'Kick'],
+		validate: 'required'
 	});
 	var check = app.newQuestion({
 		type: 'checkbox',
 		name: 'check',
 		question: 'What colors do you like?',
-		answers: ['Red', 'Green', 'Blue', 'Yellow']
+		answers: ['Red', 'Green', 'Blue', 'Yellow'],
+		validate: function(arr){ console.log('my val'); console.log(arr); return (arr.length === 2); }
 	});
 	var textQuestion = app.newQuestion({
 		type: 'text',
 		name: 'text',
-		question: 'What is your favorite word?'
+		question: 'What is your favorite word?',
+		validate: 'required'
 	});
 	var map = app.newQuestion({
 		type: 'map',
 		name: 'location',
 		question: 'Please mark a location.',
-		map: {}
+		map: {},
+		validate: 'required'
 		/*map: {
 			zoom: 8,
 			center: new google.maps.LatLng(38.5002893070005, -98.5006261939997),
