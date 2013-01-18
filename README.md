@@ -26,14 +26,14 @@ Most major HTML inputs are supported. _I will work to add HTML5 inputs as well._
 
     // text input
     var options = {
-      name: 'name',
+      name: 'name', //specify unique name
       type: 'text',
       question: 'What am I asking?'
     };
     
     // radio input (select one)
     var options = {
-      name: 'name',
+      name: 'name', //specify unique name
       type: 'radio',
       question: 'Which is the best number?',
       answers: [ 'one', 'two', 'three' ]
@@ -41,7 +41,7 @@ Most major HTML inputs are supported. _I will work to add HTML5 inputs as well._
     
     // checkbox input (select many)
     var options = {
-      name: 'name',
+      name: 'name', //specify unique name
       type: 'checkbox',
       question: 'Which numbers are even?',
       answers: [ 'one', 'two', 'three' ]
@@ -64,6 +64,10 @@ There is also a special question type for map markers. This question requires th
 The variables inside `map` are optional for creating a question, but required by Google Maps. These are passed directly to the [Google Maps API](https://developers.google.com/maps/documentation/javascript/tutorial), and all options from the [Google Maps API](https://developers.google.com/maps/documentation/javascript/reference#MapOptions) are supported here.
 
 There are several optional values you can specify:
+
+`validate` options for validation of the question. *See section below.*
+
+`schema` specifies the key for the `.allResponses()` object. Use this if you need a JSON object with specific non-descriptive keys. If this value is not specified, `name` is used instead. *This is useful if submitting to a Google Form, where the keys are in the form `entry.0.single`.*
 
 ##Validation
 
@@ -100,6 +104,14 @@ There are also some validation helpers to check formatting. These are in the `Fo
         ...
         validate: myForm.valid.wordCount(25) //checks for 25 words or less
     };
+    
+Checkbox questions have the following helpers:
+
+    myForm.valid.checkbox.countExact(5); //select exactly 5
+    myForm.valid.checkbox.countOrLess(5); //select 5 or less
+    myFOrm.valid.checkbox.countOrMore(5); //select 5 or more
+    
+*Note: these helpers do not check against question type. Make sure that the helper makes sense for the question type you are using.
 
 ##The Question Object
 
@@ -112,6 +124,10 @@ The question object exposes a few useful things.
 `.validate()` returns `true` or `false`. However, this is not required, so you should check if validate exists before calling it.
 
 ##Saving Responses
+
+The `Form` object has the helper `.allResponses()`, which will return all validated responses. This is essentially the JSON object for the form output.
+
+*TODO*
 
 Responses are saved through a [Google Docs form](http://support.google.com/drive/bin/answer.py?hl=en&answer=87809&topic=1360904&ctx=topic). This part will need to be configured by the user with a form key and a schema for the answers.
 
