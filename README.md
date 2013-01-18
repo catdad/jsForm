@@ -1,7 +1,5 @@
 #jsForm
 
-This is a sample participatory GIS / volunteered geographic information application.
-
 This project is a lightweight forms library that can construct, validate, and otherwise manipulate custom HTML forms. Although this goes against general site organization (some of your content will be in JS, rather than HTML), it allows easier creating and recording questions for the app. Creating the form builder works like this:
 
     var myForm = new Form();
