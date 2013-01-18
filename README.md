@@ -1,10 +1,8 @@
-#PGIS
+#jsForm
 
 This is a sample participatory GIS / volunteered geographic information application.
 
-_I will add an extended read-me soon, with more information on how to use this application._
-
-The major part of this project is the for builder. Although this goes against general app organization, it allows for easy creation of creating and recording questions for the app. Creating the form builder works like this:
+This project is a lightweight forms library that can construct, validate, and otherwise manipulate custom HTML forms. Although this goes against general site organization (some of your content will be in JS, rather than HTML), it allows easier creating and recording questions for the app. Creating the form builder works like this:
 
     var myForm = new Form();
 
@@ -111,7 +109,7 @@ Checkbox questions have the following helpers:
     myForm.valid.checkbox.countOrLess(5); //select 5 or less
     myFOrm.valid.checkbox.countOrMore(5); //select 5 or more
     
-*Note: these helpers do not check against question type. Make sure that the helper makes sense for the question type you are using.
+*Note: these helpers do not check against question type. Make sure that the helper makes sense for the question type you are using.*
 
 ##The Question Object
 
@@ -135,4 +133,4 @@ _This section is not complete, and I still need to make that part configurable._
 
 ##Credits
 
-My geography department has asked for an app like this several times. I finally created this so that they, and anyone else can use.
+My geography department has asked for a participatory GIS app various times. I finally created a sample app, and this library came from the need for a stupid-simple way to create complex custom questions.
