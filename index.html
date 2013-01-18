@@ -62,7 +62,7 @@
 		type: 'text',
 		name: 'text',
 		question: 'What is your favorite word?',
-		validate: 'required'
+		validate: app.valid.wordCount(5)
 	});
 	var map = app.newQuestion({
 		type: 'map',

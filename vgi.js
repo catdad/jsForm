@@ -199,6 +199,24 @@ var Form = function(callback){
 		return that;
 	};
 	
+	var valid = this.valid = {
+		phone: function(value){
+			var clean = value.replace(/[^0-9]+/g, '');
+			debug('clean string: ' + clean);
+			
+			return ((clean.charAt(0) !== '1' && clean.length === 10) || clean.charAt(0) === '1' && clean.length === 11);
+		},
+		email: function(value){
+			var exp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+			return exp.test(value);
+		},
+		wordCount: function(count){
+			return function(value){
+				return (value.split(' ').length <= count);
+			};
+		},
+	};
+	
 	var options = this.options = {
 		debug: true
 	};
