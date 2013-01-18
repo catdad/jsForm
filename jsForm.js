@@ -231,16 +231,6 @@ var Form = function(callback){
 		if (options.debug) console.log(message);
 	};
 	
-	/*
-	var table = this.table = new Tabletop({
-		key: '0AjobV6zzoAikdFQ0NnIyRTJBMko3TkJIalozeDhPeXc',
-		callback: tableCallback,
-		simpleSheet: false,
-		parseNumbers: true,
-		wanted: sheets(),
-		debug: true
-	}); /* */
-	
 	var allResponses = this.allResponses = function(){
 		var responses = {};
 		
