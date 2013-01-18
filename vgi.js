@@ -129,7 +129,7 @@ var Form = function(callback){
 		
 		//response function
 		this.response = function(){
-			return textQuestion.DOM.getElementsByTagName('input')[0].value;
+			return textQuestion.DOM.getElementsByTagName('input')[0].value || null;
 		};
 	};
 	
@@ -175,6 +175,7 @@ var Form = function(callback){
 		that.type = options.type;
 		that.name = options.name;
 		that.question = options.question;
+		that.schema = options.schema || options.name;
 		
 		//set up validation
 		if (!options.validate)
@@ -215,6 +216,11 @@ var Form = function(callback){
 				return (value.split(' ').length <= count);
 			};
 		},
+		checkbox: {
+			countExact: function(n){ return function(value){ return (value.length === n); }; },
+			countOrLess: function(n){ return function(value){ return (value.length <= n); }; },
+			countOrMore: function(n){ return function(value){ return (value.length >= n); }; }
+		}
 	};
 	
 	var options = this.options = {
@@ -239,7 +245,12 @@ var Form = function(callback){
 		var responses = {};
 		
 		each(questions, function(idx, question){
-			responses[question.name] = question.response();
+			if (question.validate){
+				responses[question.schema] = (question.validate()) ? question.response() : null;
+			}
+			else{
+				responses[question.schema] = question.response();
+			}
 		});
 		
 		return responses;
