@@ -6,11 +6,11 @@ _I will add an extended read-me soon, with more information on how to use this a
 
 The major part of this project is the for builder. Although this goes against general app organization, it allows for easy creation of creating and recording questions for the app. Creating the form builder works like this:
 
-    var myApp = new App();
+    var myForm = new Form();
 
 After that, creating questions works as follows:
 
-    var myQuestion = myApp.newQuestion({
+    var myQuestion = myForm.newQuestion({
       name: 'name',
       type: 'text',
       question: 'What am I asking?'
@@ -18,7 +18,7 @@ After that, creating questions works as follows:
     
 This app extends jQuery. After that, adding the question to the form:
 
-    $('#form').addquestion( myQuestion );
+    $('#form').addQuestion( myQuestion );
     
 ##Question Options
 
@@ -65,8 +65,41 @@ The variables inside `map` are optional for creating a question, but required by
 
 There are several optional values you can specify:
 
-*TODO*
-`validate` value can either be passed a function or the value `'required'`. The function will be given one parameter, the `.response()` object, and needs to return `true` or `false`.
+##Validation
+
+The question options takes an optional value for `validate`. The value can either be `'required'`, or a function. The function will be given one parameter, the `.response()` object, and needs to return `true` or `false`.
+
+    //checks that a valid repose is given
+    var options = {
+        ...
+        validate: 'required'
+    };
+    
+    //custom validation
+    var options = {
+        ...
+        validate: function(value){ ( checkIfValid(value) ) ? true:false }
+    };
+    
+There are also some validation helpers to check formatting. These are in the `Form.valid` object.
+
+    //check phone number formatting
+    var options = {
+        ...
+        validate: myForm.valid.phone
+    };
+    
+    //check email formatting
+    var options = {
+        ...
+        validate: myForm.valid.email
+    };
+    
+    //check work count requirements
+    var options = {
+        ...
+        validate: myForm.valid.wordCount(25) //checks for 25 words or less
+    };
 
 ##The Question Object
 
@@ -76,7 +109,6 @@ The question object exposes a few useful things.
 
 `.response()` returns the response of each question. This will return `null` if no response is found, or an appropriate response. For 'radio' or 'checkbox' questions, it will return an array. For 'text' questions, it returns a string. For 'map' quetions, it will return an object of the format `{ lat: 30.4349, lon: -90.4563 }`.
 
-*TODO*
 `.validate()` returns `true` or `false`. However, this is not required, so you should check if validate exists before calling it.
 
 ##Saving Responses
