@@ -283,10 +283,3 @@ var Form = function(callback){
 		return this;
 	};
 })(jQuery);
-
-//this is not needed... but just becuase
-(function($) {
-	$.fn.hasScrollBar = function() {
-		return this.get(0).scrollHeight > this.height();
-	}
-})(jQuery);
