@@ -78,7 +78,7 @@ The question options takes an optional value for `validate`. The value can eithe
     //custom validation
     var options = {
         ...
-        validate: function(value){ ( checkIfValid(value) ) ? true:false }
+        validate: function(value){ return ( checkIfValid(value) ) ? true:false }
     };
     
 There are also some validation helpers to check formatting. These are in the `Form.valid` object.
@@ -95,7 +95,7 @@ There are also some validation helpers to check formatting. These are in the `Fo
         validate: myForm.valid.email
     };
     
-    //check work count requirements
+    //check word count requirements
     var options = {
         ...
         validate: myForm.valid.wordCount(25) //checks for 25 words or less
