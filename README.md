@@ -132,3 +132,7 @@ _This section is not complete, and I still need to make that part configurable._
 ##Credits
 
 My geography department has asked for a participatory GIS app various times. I finally created a sample app, and this library came from the need for a stupid-simple way to create complex custom questions.
+
+## License
+
+This project is licensed under a [Creative Commons Attribution 3.0 License](http://creativecommons.org/licenses/by/3.0/). Please use, adapt, anf modify this project to your heart's content. Link back to this page wherever you can.
