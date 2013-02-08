@@ -39,6 +39,8 @@ div.question{
 div.question label{ padding: 0 0 0 10px; }
 div.question label, div.question input{ cursor: pointer; }
 
+div.question.invalid { color: red; }
+
 .map{
 	width: 100%;
 	height: 400px;

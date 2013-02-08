@@ -184,17 +184,25 @@ var Form = function(callback){
 			that.validate = function(){
 				var response = this.response();
 				
-				if ( (typeof options.validate) === 'function' && response){
+				if ( (typeof options.validate) === 'function' && response ){
 					//call custom function -- myValidate( value )
-					return options.validate( response );
+					debug('custom validation');
+					return that.validateDOM( options.validate(response) );
 				}
 				else if (options.validate === 'required'){
 					//check if this.response() is valid
-					if ( response ) return true;
-					else return false;
+					return that.validateDOM( !!response );
 				}
-				else return false;
+				else return that.validateDOM( false ); //no response was given
 			};
+			
+		that.validateDOM = function( valid ){
+			console.log('validateDOM: ' + valid);
+			if (valid) that.DOM.classList.remove('invalid');
+			else that.DOM.classList.add('invalid');
+			
+			return valid;
+		}
 		
 		//return the new question
 		return that;
@@ -277,9 +285,11 @@ var Form = function(callback){
 };
 
 //extend jQuery function
-(function($){
-	$.fn.addQuestion = function(question){
-		this.append(question.DOM);
-		return this;
-	};
-})(jQuery);
+if ($){
+	(function($){
+		$.fn.addQuestion = function(question){
+			this.append(question.DOM);
+			return this;
+		};
+	})(jQuery);
+}
