@@ -1,4 +1,4 @@
-var Form = function(callback){
+var Form = function( formOptions ){
 	//helper each function
 	//acts like $.each()
 	var each = this.each = function(arr, callback){
@@ -44,7 +44,7 @@ var Form = function(callback){
 			//marker is saved inside Question
 			if (that.marker){
 				that.marker.setPosition(ev.latLng);
-				console.log('location: ' + ev.latLng.toString() + ' update');
+				debug('location: ' + ev.latLng.toString() + ' update');
 			}
 			else{
 				var marker = that.marker = new google.maps.Marker({
@@ -53,15 +53,26 @@ var Form = function(callback){
 					map: map
 				});
 				marker.addListener('dragend', function(ev){
-					console.log('location: ' + ev.latLng.toString() );
+					debug('location: ' + ev.latLng.toString() );
 				}); /* */
 			}
+			
+			//add live validate if requested
+			if (options.liveValidate) that.validate();
 		});
+		
+		var MarkerObject = function(lat, lon){
+			this.lat = lat;
+			this.lon = lon;
+			this.toString = function(){
+				return '[' + this.lat + ',' + this.lon + ']';
+			}
+		}
 		
 		this.response = function(){
 			if (this.marker && this.marker.position) {
 				var position = this.marker.position;
-				return { lat: position.Ya, lon: position.Za };
+				return new MarkerObject( position.Ya /*lat*/, position.Za /*lon*/);
 			}
 			else 
 				return null;
@@ -75,13 +86,18 @@ var Form = function(callback){
 		var DOM = this.DOM = options.DOM;
 		
 		//return input DOM elements
-		var input = this.input = function(value){
+		var that = this;
+		var input = function(value){
 			//create input element
 			var el = document.createElement('input');
 			el.type = options.type;
 			el.name = options.name;
 			el.value = value;
 			el.id = value;
+			
+			//add live validate if requested
+			if (options.liveValidate)
+				el.onchange = function(){ that.validate() };
 			
 			//create label for the element
 			var label = document.createElement('label');
@@ -121,6 +137,10 @@ var Form = function(callback){
 		el.type = options.type;
 		el.name = options.name;
 		el.id = options.name;
+		
+		//add live validate if requested
+		var that = this;
+		if (options.liveValidate) el.onkeyup = function(){ that.validate() };
 		
 		//create the DOM for this question
 		var DOM = this.DOM = options.DOM;
@@ -197,9 +217,14 @@ var Form = function(callback){
 			};
 			
 		that.validateDOM = function( valid ){
-			console.log('validateDOM: ' + valid);
-			if (valid) that.DOM.classList.remove('invalid');
-			else that.DOM.classList.add('invalid');
+			if (valid){
+				that.DOM.classList.remove('invalid');
+				that.DOM.classList.add('valid');
+			}
+			else{
+				that.DOM.classList.remove('valid');
+				that.DOM.classList.add('invalid');
+			}
 			
 			return valid;
 		}
@@ -232,7 +257,7 @@ var Form = function(callback){
 	};
 	
 	var options = this.options = {
-		debug: true
+		debug: !!formOptions.debug
 	};
 	
 	var debug = this.debug = function(message){

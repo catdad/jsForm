@@ -33,42 +33,45 @@
 <script type="text/javascript" src='jsForm.js'></script>
 
 <script>
-	//create app object
-	var app = new Form();
+	//create form object
+	var form = new Form({debug: true});
 
 	//create questions
-	var reportType = app.newQuestion({
+	var reportType = form.newQuestion({
 		type: 'radio',
 		name: 'type',
 		question: 'What would you like to report?',
 		answers: ['Injury', 'Bar', 'Other']
 	});
-	var report = app.newQuestion({
+	var report = form.newQuestion({
 		type: 'radio',
 		name: 'report',
 		question: 'How did the injury ocur?',
 		answers: ['Fall', 'Shovel', 'Kick'],
 		validate: 'required'
 	});
-	var check = app.newQuestion({
+	var check = form.newQuestion({
 		type: 'checkbox',
 		name: 'check',
 		question: 'What colors do you like?',
 		answers: ['Red', 'Green', 'Blue', 'Yellow'],
+		liveValidate: true,
 		validate: function(arr){ return (arr.length === 2); } //select only two
 	});
-	var textQuestion = app.newQuestion({
+	var textQuestion = form.newQuestion({
 		type: 'text',
 		name: 'text',
 		question: 'What is your favorite word?',
-		validate: app.valid.wordCount(5)
+		validate: form.valid.wordCount(5),
+		liveValidate: true
 	});
-	var map = app.newQuestion({
+	var map = form.newQuestion({
 		type: 'map',
 		name: 'location',
 		question: 'Please mark a location.',
 		map: {},
-		validate: 'required'
+		validate: 'required',
+		liveValidate: true
 		/*map: {
 			zoom: 8,
 			center: new google.maps.LatLng(38.5002893070005, -98.5006261939997),
