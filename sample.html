@@ -65,6 +65,12 @@
 		validate: form.valid.wordCount(5),
 		liveValidate: true
 	});
+	var paragraph = form.newQuestion({
+		type: 'paragraph',
+		name: 'paragraph',
+		question: 'Do you have any comments?',
+		validate: form.valid.wordCount(100)
+	});
 	var map = form.newQuestion({
 		type: 'map',
 		name: 'location',
@@ -82,7 +88,7 @@
 	//add questions to DOM
 	$('#form').addQuestion(reportType);
 	$('#form').addQuestion(report);
-	$('#form').addQuestion(check).addQuestion(textQuestion);
+	$('#form').addQuestion(check).addQuestion(textQuestion).addQuestion(paragraph);
 	$('#form').addQuestion(map);
 </script>
 

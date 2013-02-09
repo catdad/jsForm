@@ -133,7 +133,7 @@ var Form = function( formOptions ){
 	//constructor for text input
 	//options = { type, name }
 	var TextQuestion = this.TextQuestion = function(options){
-		var el = document.createElement('input');
+		var el = document.createElement(options.el);
 		el.type = options.type;
 		el.name = options.name;
 		el.id = options.name;
@@ -149,7 +149,7 @@ var Form = function( formOptions ){
 		
 		//response function
 		this.response = function(){
-			return textQuestion.DOM.getElementsByTagName('input')[0].value || null;
+			return this.DOM.getElementsByTagName(options.el)[0].value || null;
 		};
 	};
 	
@@ -181,6 +181,11 @@ var Form = function( formOptions ){
 				that = new RadioQuestion(options);
 				break;
 			case 'text':
+				options.el = 'input';
+				that = new TextQuestion(options);
+				break;
+			case 'paragraph':
+				options.el = 'textarea';
 				that = new TextQuestion(options);
 				break;
 			case 'map':
