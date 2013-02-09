@@ -90,7 +90,7 @@ var Form = function( formOptions ){
 		var input = function(value){
 			//create input element
 			var el = document.createElement('input');
-			el.type = options.type;
+			el.type = options.htmlType;
 			el.name = options.name;
 			el.value = value;
 			el.id = value;
@@ -134,7 +134,7 @@ var Form = function( formOptions ){
 	//options = { type, name }
 	var TextQuestion = this.TextQuestion = function(options){
 		var el = document.createElement(options.el);
-		el.type = options.type;
+		el.type = options.htmlType;
 		el.name = options.name;
 		el.id = options.name;
 		
@@ -172,6 +172,8 @@ var Form = function( formOptions ){
 		
 		//add DOM to options
 		options.DOM = DOM;
+		//add HTML5 inputs
+		options.htmlType = options.htmlType || options.type;
 		
 		switch (options.type){
 			case 'radio':
