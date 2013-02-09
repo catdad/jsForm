@@ -18,49 +18,49 @@ This app extends jQuery. After that, adding the question to the form:
     
 ##Question Options
 
-Most major HTML inputs are supported. _I will work to add HTML5 inputs as well._ Here are sample options for the different types of questions:
+Most major HTML inputs are supported. Here are sample options for the different types of questions:
 
     // text input
     var options = {
-      name: 'name', //specify unique name
-      type: 'text', //single line
-      question: 'What am I asking?'
+        name: 'name', //specify unique name
+        type: 'text', //single line
+        question: 'What am I asking?'
     };
     
     var options = {
-      name: 'name', //specify unique name
-      type: 'paragraph', //multi-line
-      question: 'Do you have a comment?'
+        name: 'name', //specify unique name
+        type: 'paragraph', //multi-line
+        question: 'Do you have a comment?'
     };
     
     // radio input (select one)
     var options = {
-      name: 'name', //specify unique name
-      type: 'radio',
-      question: 'Which is the best number?',
-      answers: [ 'one', 'two', 'three' ]
+        name: 'name', //specify unique name
+        type: 'radio',
+        question: 'Which is the best number?',
+        answers: [ 'one', 'two', 'three' ]
     };
     
     // checkbox input (select many)
     var options = {
-      name: 'name', //specify unique name
-      type: 'checkbox',
-      question: 'Which numbers are even?',
-      answers: [ 'one', 'two', 'three' ]
+        name: 'name', //specify unique name
+        type: 'checkbox',
+        question: 'Which numbers are even?',
+        answers: [ 'one', 'two', 'three' ]
     };
     
 There is also a special question type for map markers. This question requires that you have Google Maps set up with your own developer key. Here are the options for one:
 
     // map marker question
     var options = {
-      type: 'map',
-      name: 'location',
-      question: 'Pick a location.',
-      map: {
-        zoom: 8,
-        center: new google.maps.LatLng(38.5002893070005, -98.5006261939997),
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      }
+        type: 'map',
+        name: 'location',
+        question: 'Pick a location.',
+        map: {
+            zoom: 8,
+            center: new google.maps.LatLng(38.5002893070005, -98.5006261939997),
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
     };
     
 The variables inside `map` are optional for creating a question, but required by Google Maps. These are passed directly to the [Google Maps API](https://developers.google.com/maps/documentation/javascript/tutorial), and all options from the [Google Maps API](https://developers.google.com/maps/documentation/javascript/reference#MapOptions) are supported here.
@@ -72,6 +72,20 @@ There are several optional values you can specify:
 `liveValidate` whether or not to validate on change. Value is `true` or `false`. The default is `false`.
 
 `schema` specifies the key for the `.allResponses()` object. Use this if you need a JSON object with specific non-descriptive keys. If this value is not specified, `name` is used instead. *This is useful if submitting to a Google Form, where the keys are in the form `entry.0.single`.*
+
+##Special Inputs
+
+There is some support for special HTML and HTML5 inputs. This is done through the `htmlType` property in the options. Inputs such as `email`, `tel`, `number`, and some others are all text fields with special behavior. To create those fields, use these options:
+
+    var options = {
+        type: 'text',
+        htmlType: 'email'
+        
+        //optional
+        validate: form.valid.email
+    }
+    
+_Note: I have not tested or confirmed all of these options, so please test before using them._
 
 ##Validation
 
