@@ -23,8 +23,14 @@ Most major HTML inputs are supported. _I will work to add HTML5 inputs as well._
     // text input
     var options = {
       name: 'name', //specify unique name
-      type: 'text',
+      type: 'text', //single line
       question: 'What am I asking?'
+    };
+    
+    var options = {
+      name: 'name', //specify unique name
+      type: 'paragraph', //multi-line
+      question: 'Do you have a comment?'
     };
     
     // radio input (select one)
@@ -62,6 +68,8 @@ The variables inside `map` are optional for creating a question, but required by
 There are several optional values you can specify:
 
 `validate` options for validation of the question. *See section below.*
+
+`liveValidate` whether or not to validate on change. Value is `true` or `false`. The default is `false`.
 
 `schema` specifies the key for the `.allResponses()` object. Use this if you need a JSON object with specific non-descriptive keys. If this value is not specified, `name` is used instead. *This is useful if submitting to a Google Form, where the keys are in the form `entry.0.single`.*
 
@@ -108,6 +116,14 @@ Checkbox questions have the following helpers:
     myFOrm.valid.checkbox.countOrMore(5); //select 5 or more
     
 *Note: these helpers do not check against question type. Make sure that the helper makes sense for the question type you are using.*
+
+Validation will also provide some helper CSS classes. It adds either a `valid` or `invalid` class to the question div. You can adjust how those classes are displayed through your CSS, such as this:
+
+    div.question.valid { color: green; }
+    div.question.invalid { color: red; }
+    
+    div.map.valid { border: 2px solid green; }
+    div.map.invalid { border: 2px solid red; }
 
 ##The Question Object
 
